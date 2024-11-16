@@ -18,6 +18,12 @@ POKENEAS = [
 ]
 
 
+@bp.route('/pokenea', methods=['GET'])
+def show_pokenea():
+    pokenea = random.choice(POKENEAS)
+    contenedor_id = socket.gethostname()
+    return render_template('pokenea.html', pokenea=pokenea, contenedor_id=contenedor_id)
+
 @bp.route('/api/random', methods=['GET'])
 def api_random():
     pokenea = random.choice(POKENEAS)
@@ -30,8 +36,5 @@ def api_random():
         "contenedor_id": contenedor_id
     })
 
-@bp.route('/pokenea', methods=['GET'])
-def show_pokenea():
-    pokenea = random.choice(POKENEAS)
-    contenedor_id = socket.gethostname()
-    return render_template('pokenea.html', pokenea=pokenea, contenedor_id=contenedor_id)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
